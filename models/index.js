@@ -1,8 +1,9 @@
 'use strict';
-
 require('dotenv').config();
-const { Sequelize, DataTypes } = require('sequelize');
 
+const { Sequelize, DataTypes } = require('sequelize');
+const bookSchema = require('./books');
+const pickedSchema = require('./picked-Schema');
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/samah-abujwaied'
 
 let sequelize = new Sequelize(DATABASE_URL,);
@@ -12,5 +13,7 @@ const supervisorMOdel = require('./supervisor-Schema')
 module.exports = {
     db: sequelize,
     students: userModel(sequelize, DataTypes),
-    supervisor : supervisorMOdel(sequelize,DataTypes)
+    supervisor : supervisorMOdel(sequelize,DataTypes),
+    books: bookSchema(sequelize, DataTypes),
+    pickedSchema: pickedSchema(sequelize, DataTypes)
 };
