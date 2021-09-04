@@ -1,0 +1,32 @@
+{
+  "name": "Jam3ey",
+  "version": "1.0.0",
+  "description": "**We need to build an application aims university students and help them in their reviews of courses by get all students needs help in specific subject  and find a volunteer how can explain the subject to them , besides pick a classroom to set in it , in a real efficient and time saving way.**",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realApplication/Jam3ey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realApplication/Jam3ey/issues"
+  },
+  "homepage": "https://github.com/realApplication/Jam3ey#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.2"
+  }
+}
