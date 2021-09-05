@@ -6,9 +6,11 @@ const router = express.Router();
 // const signin = require('../controller/signin.controller')
 const signup = require('../controller/signup.controller');
 const basicAuth = require('../middleware/basicAuth');
+const bearerAuth = require('../middleware/bearerAuth');
 const {students}  = require('../models/index');
 
-router.post('/signin', basicAuth(students), (req, res, next)=> {
+router.post('/signin', basicAuth, (req, res, next)=> {
+    console.log("ssssssssssssssss")
     res.status(200).json(req.user);
 });
 
