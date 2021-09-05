@@ -54,17 +54,18 @@ const addPickedBooks = async (req, res) => {
         let Record = await books.findOne({ where: { id: id } });
         console.log(Record);
         req.body=Record.dataValues;
+        console.log("req.body",req.body);
         let book = await pickedSchema.create(req.body)
         res.status(200).json(book);
     }
     catch (err) {
-   
-        if(err.message=="Validation error")
-        {
-            res.json("all ready have it")
-            return false;
-        }
-        res.json('not found')
+   console.log(err.message);
+        // if(err.message=="Validation error")
+        // {
+        //     res.json("all ready have it")
+        //     return false;
+        // }
+        // res.json('not found')
     }
 }
 
