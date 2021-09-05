@@ -3,6 +3,9 @@
 const { books } = require('../models/index');
 const { pickedSchema } = require('../models/index')
 
+const client = require('socket.io-client');
+const host = "http://localhost:7892";
+const socket = client.connect(host);
 
 
 const getBooks = async (req, res) => {
@@ -53,39 +56,25 @@ const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
         let Record = await books.findOne({ where: { id: id } });
-        console.log(">>>>>>>>>RECORD",Record);
         let userId=req.userId;
-        console.log(">>>>>>>>>>>>>" , userId)
-     
         let data={
 
             title:Record.dataValues.title, 
             author:Record.dataValues.author,
             image:Record.dataValues.image,
-             userId:userId
+            userId:userId
         };
-        req.body=data;
-       
-
         let dataTest=await pickedSchema.findOne({where :{title : Record.dataValues.title}});
+        req.body=data;  
         if(dataTest){
             res.json("all ready have it");
         }
-        console.log("pickedschema-------->" , data);
-
-        console.log("------->userID" , userId)
-        console.log("req.body",req.body);
         let book = await pickedSchema.create(data)
-       
-        res.status(200).json(book);
+        console.log(book);
+        await socket.emit('pickedbook' , data).then(()=>res.status(200).json(book));
+        
     }
-    catch (err) {
-   console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
-        if(err.message=="Validation error")
-        {
-            res.json("all ready have it")
-            return false;
-        }
+    catch  (err) {
         res.json('not found')
     }
 }

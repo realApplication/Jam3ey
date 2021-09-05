@@ -1,8 +1,6 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-const {students}  = require('../models/index');
-const basicAuth = require('../middleware/basicAuth');
 const bearerAuth = require("../middleware/bearerAuth");
 
 const {
