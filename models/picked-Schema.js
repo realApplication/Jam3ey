@@ -1,6 +1,4 @@
 'use strict';
-require('dotenv').config();
-
 
 const pickedSchema = (sequelize, DataTypes) => {
   const model = sequelize.define('pickeds', {

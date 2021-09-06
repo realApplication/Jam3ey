@@ -9,7 +9,7 @@ const {
     getPickedBooks,
     addPickedBooks,
     deletePickedBooks
-
+    
 } =require('../controller/book.controller')
 
 router.get('/book/:id', getBooks);

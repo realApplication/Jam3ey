@@ -52,7 +52,7 @@ const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
         let Record = await books.findOne({ where: { id: id } });
-        console.log(Record);
+        
         req.body=Record.dataValues;
         let book = await pickedSchema.create(req.body)
         res.status(200).json(book);
@@ -61,10 +61,10 @@ const addPickedBooks = async (req, res) => {
    
         if(err.message=="Validation error")
         {
-            res.json("all ready have it")
+            res.json(err.message)
             return false;
         }
-        res.json('not found')
+        res.json(err.message)
     }
 }
 
