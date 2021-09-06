@@ -65,19 +65,33 @@ const addPickedBooks = async (req, res) => {
              userId:userId
         };
         req.body=data;
+    
+        // console.log("pickedSchema", await pickedSchema.findAll());
+        let checked = await pickedSchema.findAll({where :{ userId :userId ,title:Record.dataValues.title}});
        
+        console.log("------------------------------",checked);
 
-        let dataTest=await pickedSchema.findOne({where :{title : Record.dataValues.title}});
-        if(dataTest){
-            res.json("all ready have it");
-        }
-        console.log("pickedschema-------->" , data);
+        let dataTest=await pickedSchema.findOne({where :{ userId :userId ,title:Record.dataValues.title}});
 
-        console.log("------->userID" , userId)
-        console.log("req.body",req.body);
+        // let checkUserID= await pickedSchema.findOne({where :{userId :pickedSchema.dataValues.userId}});
+         
+        // // if(checkUserID){
+        // //     checkUserID =true;
+        // // }else{
+        // //     checkUserID=false;
+        // // }
+
+        if(dataTest ){
+            res.json("all ready have it  !!!!!!!!!!!!!!!");
+        }else{
+        // console.log("pickedschema-------->" , data);
+
+        // console.log("------->userID" , userId)
+        // console.log("req.body",req.body);
         let book = await pickedSchema.create(data)
        
         res.status(200).json(book);
+        }
     }
     catch (err) {
    console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
