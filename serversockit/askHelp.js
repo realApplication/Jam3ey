@@ -21,7 +21,7 @@ let askHelp= async (req , res)=>{
 }
 catch(err)
 {
-    res.status(500).json('you need tp pick book first ...')
+    res.status(500).json('you need to pick book first ...')
 }
 
 
