@@ -3,6 +3,10 @@
 const { books } = require('../models/index');
 const { pickedSchema } = require('../models/index')
 
+const client = require('socket.io-client');
+const host = "http://localhost:7893";
+const socket = client.connect(host);
+
 
 
 const getBooks = async (req, res) => {
@@ -45,7 +49,6 @@ const deleteBooks = async (req, res) => {
 
 const getPickedBooks = async (req, res) => {
     let allRecords = await pickedSchema.findAll();
-    console.log(allRecords);
     res.status(200).json(allRecords);
 }
 
@@ -65,22 +68,26 @@ const addPickedBooks = async (req, res) => {
              userId:userId
         };
         req.body=data;
-       
 
-        let dataTest=await pickedSchema.findOne({where :{title : Record.dataValues.title}});
-        if(dataTest){
-            res.json("all ready have it");
+        let checked = await pickedSchema.findAll({where :{ userId :userId ,title:Record.dataValues.title}});
+       
+        console.log("------------------------------",checked);
+
+        let dataTest=await pickedSchema.findOne({where :{ userId :userId ,title:Record.dataValues.title}});
+        if(dataTest ){
+            res.json("all ready have it  !!!!!!!!!!!!!!!");
         }
-        console.log("pickedschema-------->" , data);
+       else{
+            let book = await pickedSchema.create(data)
+         
+            await socket.emit('pickedbook',{id:Record.dataValues.id,name:req.user.dataValues.userName} );
+            
+            res.status(200).json(book);
 
-        console.log("------->userID" , userId)
-        console.log("req.body",req.body);
-        let book = await pickedSchema.create(data)
-       
-        res.status(200).json(book);
+            }
+        
     }
     catch (err) {
-   console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
         if(err.message=="Validation error")
         {
             res.json("all ready have it")
@@ -90,10 +97,11 @@ const addPickedBooks = async (req, res) => {
     }
 }
 
+
 const deletePickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
-        let deletedBook = await pickedSchema.destroy({ where: { id: id } });
+        await pickedSchema.destroy({ where: { id: id } });
         res.status(200).json("item deleted");
 
     }

@@ -2,31 +2,30 @@
 require('dotenv').config();
 
 const { Sequelize, DataTypes } = require('sequelize');
-const bookSchema = require('./books');
+const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/proj'
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/samah-abujwaied'
 
 let sequelize = new Sequelize(DATABASE_URL,);
 const userModel = require('./student-Schema')
 const supervisorMOdel = require('./supervisor-Schema')
+const counterModel = require('./booksCounter-Schema')
+const superModel = require('./super-Schema')
 
 const bookSchemas =bookSchema(sequelize, DataTypes)
 const userModels=userModel(sequelize, DataTypes)
 const pickedSchemas=pickedSchema(sequelize, DataTypes)
-
-// userModels.hasMany(bookSchemas, { foreignKey: 'customerId', sourceKey: 'id'});
-// bookSchemas.belongsTo(userModels, { foreignKey: 'customerId', targetKey: 'id'});
-
-// userModels.hasMany(pickedSchemas, { foreignKey: 'userId', sourceKey: 'id'});
-// pickedSchemas.belongsTo(userModels, { foreignKey: 'userId', targetKey: 'id'});
-
+const counterSchema = counterModel(sequelize, DataTypes)
+const superSchema = superModel(sequelize, DataTypes)
 
 module.exports = {
     db: sequelize,
     students: userModels,
     supervisor : supervisorMOdel(sequelize,DataTypes),
     books: bookSchemas,
-    pickedSchema: pickedSchemas
+    pickedSchema: pickedSchemas,
+    counterSchema:counterSchema,
+    superSchema:superSchema
 };
 
 
