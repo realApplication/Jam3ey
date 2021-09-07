@@ -7,8 +7,6 @@ const client = require('socket.io-client');
 const host = "http://localhost:7893";
 const socket = client.connect(host);
 
-
-
 const getBooks = async (req, res) => {
     let id = parseInt(req.params.id);
     if (!id) {
@@ -56,9 +54,7 @@ const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
         let Record = await books.findOne({ where: { id: id } });
-        console.log(">>>>>>>>>RECORD",Record);
         let userId=req.userId;
-        console.log(">>>>>>>>>>>>>" , userId)
      
         let data={
 
@@ -68,24 +64,16 @@ const addPickedBooks = async (req, res) => {
              userId:userId
         };
         req.body=data;
-
-        let checked = await pickedSchema.findAll({where :{ userId :userId ,title:Record.dataValues.title}});
-       
-        console.log("------------------------------",checked);
-
         let dataTest=await pickedSchema.findOne({where :{ userId :userId ,title:Record.dataValues.title}});
         if(dataTest ){
             res.json("all ready have it  !!!!!!!!!!!!!!!");
         }
        else{
             let book = await pickedSchema.create(data)
-         
-            await socket.emit('pickedbook',{id:Record.dataValues.id,name:req.user.dataValues.userName} );
-            
+            // await socket.emit('pickedbook',{id:Record.dataValues.id,name:req.user.dataValues.userName} );
             res.status(200).json(book);
 
-            }
-        
+            }       
     }
     catch (err) {
         if(err.message=="Validation error")
@@ -96,7 +84,6 @@ const addPickedBooks = async (req, res) => {
         res.json('not found')
     }
 }
-
 
 const deletePickedBooks = async (req, res) => {
     try {
@@ -109,7 +96,6 @@ const deletePickedBooks = async (req, res) => {
         console.log(err);
     }
 }
-
 
 module.exports = {
     getBooks,

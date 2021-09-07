@@ -8,8 +8,8 @@ const {pickedSchema}=require('../models/index')
 let askHelp= async (req , res)=>{
     let id=req.userId;
     let Record= await pickedSchema.findOne({where:{userId:id}});
-    console.log(Record);
-       
+    // console.log(Record);
+  try {      
   let UserData=
   {
       studentId:Record.dataValues.userId,
@@ -18,6 +18,11 @@ let askHelp= async (req , res)=>{
   };
   socket.emit('helpstudent' , UserData);
  res.json("will hear it from us soon");
+}
+catch(err)
+{
+    res.status(500).json('you need tp pick book first ...')
+}
 
 
 }

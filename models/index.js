@@ -10,7 +10,7 @@ let sequelize = new Sequelize(DATABASE_URL,);
 const userModel = require('./student-Schema')
 const supervisorMOdel = require('./supervisor-Schema')
 const counterModel = require('./booksCounter-Schema')
-const superModel = require('./super-Schema')
+const superModel = require('./room-Schema')
 
 const bookSchemas =bookSchema(sequelize, DataTypes)
 const userModels=userModel(sequelize, DataTypes)
@@ -18,7 +18,7 @@ const pickedSchemas=pickedSchema(sequelize, DataTypes)
 const counterSchema = counterModel(sequelize, DataTypes)
 const superSchema = superModel(sequelize, DataTypes)
 
-module.exports = {
+module.exports =  {
     db: sequelize,
     students: userModels,
     supervisor : supervisorMOdel(sequelize,DataTypes),

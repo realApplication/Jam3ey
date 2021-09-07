@@ -3,10 +3,8 @@ require('dotenv').config();
 
 
 const superSchema = (sequelize, DataTypes) => {
-  const model = sequelize.define('superdata', {
+  const model = sequelize.define('superdataschema', {
     classroom:{type: DataTypes.STRING, allowNull: true , unique: true},
-    // helper: { type: DataTypes.STRING, allowNull: false},
-    // std:{type: DataTypes.STRING, allowNull: false},
 
   });
   return model;
