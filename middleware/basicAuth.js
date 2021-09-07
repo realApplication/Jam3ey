@@ -4,7 +4,7 @@ const base64 = require('base-64')
 
 
 module.exports = (UserSchema) => (req, res, next) => {
-    console.log("req.headers['authorization']",req.headers['authorization']);
+    // console.log("req.headers['authorization']",req.headers['authorization']);
     if (!req.headers['authorization']) {
         next('No Authorization info');
         return;
