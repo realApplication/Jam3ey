@@ -20,6 +20,9 @@ router.get('/book', getBooks);
 router.post('/book',addBooks );
 router.delete('/book/:id',deleteBooks );
 
+
+
+
 router.get('/pickedbook',bearerAuth,getPickedBooks)
 router.post('/pickedbook/:id',bearerAuth,addPickedBooks)
 router.delete('/pickedbook/:id',bearerAuth,deletePickedBooks)
