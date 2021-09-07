@@ -1,154 +1,79 @@
 'use strict';
 const app = require('express')()
 // const http = require('http').createServer(app)
-const io = require('socket.io')(7892)
+const io = require('socket.io')(7893)
 const uuid = require('uuid').v4;
 const cors = require('cors');
+const {setCounter,getCounter} = require('./conterbook')
 app.use(cors());
 
-app.use((req, res, next) =>{
+let date = new Date();
+let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+let time = date.toLocaleTimeString()
+
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
-  next();});
-
-const studentData = {
-  data : {}
-}
-
-io.on('connection', socket => {
-  console.log("CONNECTED", socket.id)
-  socket.on('pickedbook', (studentsdata)=> {
-      console.log('sockit io data' , studentsdata);
-      const id = uuid();   
-      studentData.data[id] = studentsdata;
-      console.log(Object.keys(studentData.data).length);
-    if(Object.keys(studentData.data).length>=3)
-     {
-      io.emit('volunteer',(Object.keys(studentData.data).length));
-     }
-    });
-    socket.on('picked',data=>{
-      console.log('piked ' ,data);
-      io.emit('supervisor',studentData.data);   
-    })
-    socket.on('classRoom', data=>{
-      console.log('classRoom',data);
-      io.emit('sendresp',data);
-  })
-
+  next();
 });
 
+const studentData = {
+  data: {}
+}
+io.on('connection', socket => {
+  console.log("CONNECTED", socket.id)
+  // socket.on('pickedbook', (studentsdata) => {
+  //   const idx = uuid();
+  //   studentData.data[idx] = studentsdata;;
 
+    // for (const [key, obj] of Object.entries(studentData.data)) {
+    //   if (obj.id == studentsdata.id)
+    // }
+    // for (let index = 0; index < Object.keys(studentData.data).length; index++) {
+    //   if (studentsdata.id == studentData.data[idx].id)
+    //     console.log('studentData.data');
+    // }
+    // if (Object.keys(studentData.data).length >= 3) {
+    //   io.emit('volunteer', (Object.keys(studentData.data).length));
+    // }
+  // });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // socket.emit('volunteer',(Object.keys(msgQueueClient.data).length));
-//    socket.on('volunteer' , (data)=>{
-//     console.log('volunteer',data);
+  socket.on('helpstudent',async payload => {
+    console.log('event', {
+      event: 'ask for help ....... ',
+      payload: payload
+    });
     
-// } );
+    let counter = await getCounter(payload.bookId)
+    let count = parseInt(counter.counter)
+    count+=1;
+    let data = {
+      bookid:count.bookId,
+      counter:count
+    }
+    await setCounter(payload.bookId,count);
 
-//   socket.on('admin_msg', ({ name, message })=> {
-//     console.log("adding a new task ....")
-//     const id = uuid();
-//     console.log("id ====> ", id)
-//     msgQueueAdmin.data[id] = { name, message };
-   
-//     discord.emit('admin-data', { name: msgQueueAdmin.data[id].name,message: msgQueueAdmin.data[id].message,id:id });
-//   //   console.log("after add msgQueueAdmin ========> ", msgQueueAdmin);
-   
-//   console.log(msgQueueAdmin.data[id].name,msgQueueAdmin.data[id].message);
-// });
+  });
+  // socket.on('picked', data => {
+  //   console.log(data, 'piked ');
+  //   io.emit('supervisor', studentData.data);
+  // })
+  // socket.on('classRoom', data => {
+  //   console.log('class Room : ', data);
+  //   io.emit('sendresp', data);
+  // })
 
-// socket.on('accept_msg',(msg)=>{
-//   console.log('===================');
-//   console.log('msg------>',msg.accept,msg.gotmsg);
-//   // const acceptmsg = msgQueueClient.data[msg.id] ;
-//   discord.emit('sendaccept',{msgreq:msg.accept,massage:msg.gotmsg})
+  socket.on('volunteerr', payload => {
+    console.log('event', {
+      event: 'pickup',
+      time: `day: ${day} Time :${time}`,
+      payload: payload
+    });
+  });
 
-// })
-
-// socket.on('ignore_msg',(msg)=>{
-//   // const ignoremsg = msgQueueClient.data[msg.id] ;
-//   console.log('ignnnnnnnnnoooore',msg.ignore,msg.gotmsg);
-//   discord.emit('sendignore',{msgreq:msg.ignore,massageig:msg.gotmsg})
-
-// })
-
-//   socket.on('get_all', ()=> {
-//       console.log("get_all : all messages from client ")
-//       Object.keys(msgQueueClient.data).forEach(id=> {
-//           socket.emit('res-client', {name: msgQueueClient.data[id].name,message: msgQueueClient.data[id].message,id:id });
-//       });
-//   });
-  
-//   socket.on('get_all-client', ()=> {
-//       console.log("get_all-client : all messages from admin")
-//       Object.keys(msgQueueAdmin.data).forEach(id=> {
-//           socket.emit('admin-data', { name: msgQueueAdmin.data[id].name,message: msgQueueAdmin.data[id].message ,id:id});
-//     });
-//   });
-
-//   socket.on('received-client', id => {
-//       console.log("admin received from client messages on queue will remove it ...")
-//       // he child confirmed receiving , remove from queue
-//       delete msgQueueClient.data[id];
-//       console.log("after delete msgQueueClient @@@@@@@@@@ ", msgQueueClient)
-//   })
-//   socket.on('received-admin', id => {
-//     console.log("client received from admin messages on queue will remove it ...")
-//     // he child confirmed receiving , remove from queue
-//   //   discord.emit('res-client','your message has been recevied');
-//     delete msgQueueAdmin.data[id];
-//     console.log("after delete msgQueueAdmin @@@@@@@@@@ ", msgQueueAdmin)
-// })
-
-  
-// http.listen(7000, function() {
-//   console.log('listening on port 7000')
-// })
-// app.get('/', function(req,res) {
-//   res.send('connected')
-// })
-
+});
 
 
 

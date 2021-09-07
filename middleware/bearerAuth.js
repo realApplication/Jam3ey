@@ -10,13 +10,14 @@ module.exports = async (req, res, next) => {
     const validUser = await students.authenticateToken(token);
   
     req.user = validUser;
-    console.log(req.user);
+    // console.log(req.user);
     req.token = validUser.token;
     req.userId=validUser.id;
+    
     next();
 
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     _authError();
   }
 

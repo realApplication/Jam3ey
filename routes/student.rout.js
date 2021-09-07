@@ -4,8 +4,8 @@ const router = express.Router();
 
 const signup = require('../controller/signup.controller');
 const basicAuth = require('../middleware/basicAuth');
-
-router.post('/signin', basicAuth, (req, res, next)=> {
+const {students} = require('../models/index')
+router.post('/signin', basicAuth(students), (req, res, next)=> {
     res.status(200).json(req.user);
 });
 
