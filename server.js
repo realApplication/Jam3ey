@@ -20,12 +20,9 @@ app.get('/', (req, res) => { res.send("hello world");});
 // app.use(errorHandler);
 // app.use(notFound);
 
-const start=(port)=>{
-    app.listen(port,()=>console.log(`listining to port :  ${port}` ))
-}
 
 module.exports={
-    start:start,
+    // start:start,
     app:app
 };
 
