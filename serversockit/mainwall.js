@@ -4,9 +4,8 @@
 require('dotenv').config();
 const client = require('socket.io-client');
 
-const host = process.env.HOST
-//"http://localhost:7893";
-const socket = client.connect(host);
+// const host = process.env.HOST || "http://localhost:7893";
+const socket = client.connect();
 
 socket.on('mainwall',data=>{
   console.log('will be class in', data.className, 'The volunter will be ' ,data.volunteerName,
