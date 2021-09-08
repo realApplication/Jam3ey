@@ -4,7 +4,7 @@
 require('dotenv').config();
 const client = require('socket.io-client');
 
-const host = process.env.HOST
+const host = process.env.PORT
 //"http://localhost:7893";
 const socket = client.connect(host);
 
