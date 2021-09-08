@@ -2,11 +2,11 @@
 const {counterSchema}=require('../models/index')
 
 const setCounter=async (idbook,counterbook)=>{
- 
- 
-   try { let iddx = idbook.toString();
+    
+    let iddx = idbook.toString();
     let count = counterbook.toString();
-
+   
+   try {       
     let counterData = await counterSchema.findOne({where:{idbook:iddx}})
     let id =  counterData.dataValues.id;
     let data={
@@ -18,15 +18,13 @@ const setCounter=async (idbook,counterbook)=>{
      return data.counter
     } 
     catch(err){
-        console.log('There is not found' , err.message);   
+        console.log(' not found' , err.message);   
     }
    
 }
 const getCounter=async (id)=>{
-    // console.log('id',id);
     let idx = id.toString(); 
     let counterData = await counterSchema.findOne({where:{idbook:idx}});
-    // console.log('counter book ', counterData);
     return counterData.dataValues.counter
   
 }

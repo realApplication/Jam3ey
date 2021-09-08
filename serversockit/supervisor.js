@@ -7,7 +7,7 @@ const {superSchema}= require('../models/index')
 
 socket.on('supervisor' , async(data)=>{
     console.log(data);
-    let ranId = Math.floor(Math.random() * 5);
+    let ranId = Math.floor(Math.random() * 10);
     let counterData = await superSchema.findOne({where:{id:ranId}})
      let classdata ={
          volunteerName : data.name.student,
