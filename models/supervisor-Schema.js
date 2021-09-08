@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET || 'secretstring';
 
 const userModel = (sequelize, DataTypes) => {
-  const model = sequelize.define('supertest', {
+  const model = sequelize.define('supervisrorsignup', {
     email: { type: DataTypes.STRING, required: true, unique: true ,validate: { isEmail: true} },
     userName: { type: DataTypes.STRING, required: true },
     password: { type: DataTypes.STRING, required: true },

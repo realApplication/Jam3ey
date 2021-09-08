@@ -25,12 +25,13 @@ io.on('connection', socket => {
       event: 'ask for help ....... ',
       payload: payload
     });
-    // console.log('payload.bookId',payload.bookId);
+  
     let getcounter = await getCounter(payload.bookId)
-   
-    let count = parseInt(getcounter)
-    // console.log('counter----------------------------',count);
+    
+    let count = parseInt(getcounter);
     count+=1;
+    console.log(payload.bookId);
+    console.log(count);
     await setCounter(payload.bookId,count);
   });
 

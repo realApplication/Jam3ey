@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 const pickedSchema = (sequelize, DataTypes) => {
-  const model = sequelize.define('pickedbookschema', {
+  const model = sequelize.define('pickedbookschema1', {
     title: { type: DataTypes.STRING, allowNull: false},
     author: { type: DataTypes.STRING, allowNull: false},
     image:{type: DataTypes.STRING, allowNull: false},

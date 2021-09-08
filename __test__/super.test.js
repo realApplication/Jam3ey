@@ -10,8 +10,8 @@ describe('supervisor tests', ()=> {
 // ----------------------- test fot sign up new supervisor -------------------
     it('signup for supervisor', async () => {
         let obj = {
-            userName: "mmmmm",
-            email: "mmm@mmm.com",
+            email: "samaaaaaa@gmail.co",
+            userName: "samah",
             password: "1234"
         }
         const response = await request.post('/v1/signup').send(obj);
@@ -31,12 +31,20 @@ describe('supervisor tests', ()=> {
     it('test for creat room ', async () => {
     
         const reqBody={
-            "classroom":"class112"       
+            "classroom":"classAAA"       
     }
         const response = await request.post('/v1/data').send(reqBody);
         expect(response.status).toEqual(200);
     });
-
+ 
+    it('test for creat room another room', async () => {
+    
+        const reqBody={
+            "classroom":"classBBB"       
+    }
+        const response = await request.post('/v1/data').send(reqBody);
+        expect(response.status).toEqual(200);
+    });
 
 // ----------------------- test for show all rooms ------------------------------
     it('test for get all rooms ', async () => {

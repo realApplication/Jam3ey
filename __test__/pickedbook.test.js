@@ -16,6 +16,11 @@ describe("my API Server", () => {
     expect(typeof request.get("/pickedbook")).toEqual("object"); // superagent is behind this
   });
 
+  it("Ask Help ", async () => {
+    const response = await request.get("/askHelp"); // async
+    expect(typeof request.get("/askHelp")).toEqual("object"); // superagent is behind this
+  });
+
   it("/ pickedbook/:id", async () => {
     const response = await request.post("/pickedbook/1"); // async
     expect(response.status).toEqual(500);
