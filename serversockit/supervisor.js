@@ -1,7 +1,10 @@
 'use strict';
 
+require('dotenv').config();
 const client = require('socket.io-client');
-const host = "http://localhost:7893";
+
+const host = process.env.HOST
+//"http://localhost:7893";
 const socket = client.connect(host);
 const {superSchema}= require('../models/index')
 
