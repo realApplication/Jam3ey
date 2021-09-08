@@ -13,12 +13,12 @@ const booksRout = require('./routes/books.rout');
 
 app.get('/', (req, res) => { res.send("hello world");});
 
-app.use(express.urlencoded({ extended: true }));
-app.use(studentRout);
-app.use(supervisorRout);
-app.use(booksRout);
-app.use(errorHandler);
-app.use(notFound);
+// app.use(express.urlencoded({ extended: true }));
+// app.use(studentRout);
+// app.use(supervisorRout);
+// app.use(booksRout);
+// app.use(errorHandler);
+// app.use(notFound);
 
 const start=(port)=>{
     app.listen(port,()=>console.log(`listining to port :  ${port}` ))
