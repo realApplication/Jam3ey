@@ -6,10 +6,15 @@ const {db}=require('./models/index')
 const server = require('./server');
 const port = process.env.PORT;
 
- const start=(port)=>{
-    app.listen(port,()=>console.log(`listining to port :  ${port}` ))
-}
+// const start=(port)=>{
+//     app.listen(port,()=>console.log(`listining to port :  ${port}` ))
+    
+// }
 
 db.sync().then(() => {
-start(port);
+// start(port);
+
+    app.listen(port,()=>console.log(`listining to port :  ${port}` ));
+    
+
  });
