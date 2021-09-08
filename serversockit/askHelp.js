@@ -1,8 +1,7 @@
 'use strict'
 require('dotenv').config();
 
-const host = process.env.PORT
-//"http://localhost:7893";
+const host = process.env.HOST || "http://localhost:7893";
 const client = require('socket.io-client');
 const socket = client.connect(host);
 const {pickedSchema}=require('../models/index')
