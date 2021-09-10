@@ -3,8 +3,8 @@
 require('dotenv').config();
 const client = require('socket.io-client');
 
-// const host = process.env.HOST || "http://localhost:7893";
-const socket = client.connect();
+const host = process.env.HOST || "http://localhost:7893";
+const socket = client.connect(host);
 const {superSchema}= require('../models/index')
 
 socket.on('supervisor' , async(data)=>{
