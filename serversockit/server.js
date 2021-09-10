@@ -1,7 +1,11 @@
 'use strict';
-const app = require('express')()
-require('dotenv').config();
-const io = require('socket.io')(process.env.HOST)
+const express = require("express");
+require("dotenv").config();
+const app = express();
+const server = require('http').createServer(app)
+const io = require('socket.io')(7893)
+
+// const io = require('socket.io')(7893)
 const cors = require('cors');
 const {setCounter,getCounter} = require('./conuterbook')
 app.use(cors());
