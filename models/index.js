@@ -4,7 +4,7 @@ require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/proj'
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/samah-abujwaied'
 
 let sequelize = new Sequelize(DATABASE_URL,);
 const userModel = require('./student-Schema')
