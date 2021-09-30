@@ -4,6 +4,7 @@ const { books } = require('../models/index');
 const { pickedSchema } = require('../models/index')
 
 
+
 const getBooks = async (req, res) => {
     let id = parseInt(req.params.id);
     if (!id) {
@@ -58,7 +59,7 @@ const addPickedBooks = async (req, res) => {
         res.status(200).json(book);
     }
     catch (err) {
-   
+   console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
         if(err.message=="Validation error")
         {
             res.json(err.message)
