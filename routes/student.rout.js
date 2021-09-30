@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
+
 // const signin = require('../controller/signin.controller')
 const signup = require('../controller/signup.controller');
 const basicAuth = require('../middleware/basicAuth');
@@ -15,5 +16,6 @@ router.post('/signin', basicAuth, (req, res, next)=> {
 });
 
 // router.post('/signin',basicAuth)
+
 router.post('/signup',signup)
 module.exports = router;

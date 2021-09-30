@@ -3,6 +3,9 @@
 const { books } = require('../models/index');
 const { pickedSchema } = require('../models/index')
 
+const client = require('socket.io-client');
+const host = "http://localhost:7893";
+const socket = client.connect(host);
 
 
 const getBooks = async (req, res) => {
@@ -45,7 +48,6 @@ const deleteBooks = async (req, res) => {
 
 const getPickedBooks = async (req, res) => {
     let allRecords = await pickedSchema.findAll();
-    console.log(allRecords);
     res.status(200).json(allRecords);
 }
 
@@ -53,13 +55,14 @@ const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
         let Record = await books.findOne({ where: { id: id } });
+
         
         req.body=Record.dataValues;
         let book = await pickedSchema.create(req.body)
         res.status(200).json(book);
     }
     catch (err) {
-   console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
+
         if(err.message=="Validation error")
         {
             res.json(err.message)
@@ -72,7 +75,7 @@ const addPickedBooks = async (req, res) => {
 const deletePickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
-        let deletedBook = await pickedSchema.destroy({ where: { id: id } });
+        await pickedSchema.destroy({ where: { id: id } });
         res.status(200).json("item deleted");
 
     }
@@ -80,7 +83,6 @@ const deletePickedBooks = async (req, res) => {
         console.log(err);
     }
 }
-
 
 module.exports = {
     getBooks,
