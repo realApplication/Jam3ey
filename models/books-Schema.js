@@ -2,11 +2,15 @@
 'use strict';
 require('dotenv').config();
 
+
+
 const bookSchema = (sequelize, DataTypes) => {
-  const model = sequelize.define('bookschema1', {
-    title: {type: DataTypes.STRING, allowNull: false,required: true, unique: true  },
-    author: { type: DataTypes.STRING,allowNull:false, required: true},
-    image:{type: DataTypes.STRING,required: true},
+  const model = sequelize.define('boook', {
+    title: { type: DataTypes.STRING, allowNull: false},
+    author: { type: DataTypes.STRING, allowNull: false},
+    image:{type: DataTypes.STRING, allowNull: false},
+    description:{type: DataTypes.STRING, allowNull: false},
+ 
 
   });
   return model;

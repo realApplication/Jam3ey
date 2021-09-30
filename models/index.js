@@ -16,17 +16,24 @@ const superModel = require('./room-Schema')
 const bookSchemas =bookSchema(sequelize, DataTypes)
 const userModels=userModel(sequelize, DataTypes)
 const pickedSchemas=pickedSchema(sequelize, DataTypes)
-const counterSchema = counterModel(sequelize, DataTypes)
-const superSchema = superModel(sequelize, DataTypes)
 
-module.exports =  {
+
+// userModels.hasMany(bookSchemas, { foreignKey: 'customerId', sourceKey: 'id'});
+// bookSchemas.belongsTo(userModels, { foreignKey: 'customerId', targetKey: 'id'});
+
+// userModels.hasMany(pickedSchemas, { foreignKey: 'userId', sourceKey: 'id'});
+// pickedSchemas.belongsTo(userModels, { foreignKey: 'userId', targetKey: 'id'});
+
+
+module.exports = {
+
     db: sequelize,
     students: userModels,
     supervisor : supervisorMOdel(sequelize,DataTypes),
     books: bookSchemas,
-    pickedSchema: pickedSchemas,
-    counterSchema:counterSchema,
-    superSchema:superSchema
+
+    pickedSchema: pickedSchemas
+
 };
 
 

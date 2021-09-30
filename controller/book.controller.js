@@ -7,6 +7,7 @@ const client = require('socket.io-client');
 const host = "http://localhost:7893";
 const socket = client.connect(host);
 
+
 const getBooks = async (req, res) => {
     let id = parseInt(req.params.id);
     if (!id) {
@@ -54,34 +55,20 @@ const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
         let Record = await books.findOne({ where: { id: id } });
-        let userId=req.userId;
-     
-        let data={
 
-            title:Record.dataValues.title, 
-            author:Record.dataValues.author,
-            image:Record.dataValues.image,
-             userId:userId
-        };
-        req.body=data;
-        let dataTest=await pickedSchema.findOne({where :{ userId :userId ,title:Record.dataValues.title}});
-        if(dataTest ){
-            res.json("all ready have it  !!!!!!!!!!!!!!!");
-        }
-       else{
-            let book = await pickedSchema.create(data)
-            // await socket.emit('pickedbook',{id:Record.dataValues.id,name:req.user.dataValues.userName} );
-            res.status(200).json(book);
-
-            }       
+        
+        req.body=Record.dataValues;
+        let book = await pickedSchema.create(req.body)
+        res.status(200).json(book);
     }
     catch (err) {
+
         if(err.message=="Validation error")
         {
-            res.json("all ready have it")
+            res.json(err.message)
             return false;
         }
-        res.json('not found')
+        res.json(err.message)
     }
 }
 

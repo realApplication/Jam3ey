@@ -13,7 +13,8 @@ const booksRout = require('./routes/books.rout');
 
 app.get('/', (req, res) => { res.send("hello world");});
 
-app.use(express.urlencoded({ extended: true }));
+
+
 app.use(studentRout);
 app.use(supervisorRout);
 app.use(booksRout);

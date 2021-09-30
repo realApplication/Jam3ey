@@ -1,5 +1,4 @@
 'use strict'
-const base64 = require('base-64');
 const { students } = require('../models/index');
 
 module.exports=async (req,res)=>{
