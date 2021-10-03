@@ -3,7 +3,6 @@
 require('dotenv').config();
 
 
-
 const bookSchema = (sequelize, DataTypes) => {
   const model = sequelize.define('boook', {
     title: { type: DataTypes.STRING, allowNull: false},
@@ -11,7 +10,6 @@ const bookSchema = (sequelize, DataTypes) => {
     image:{type: DataTypes.STRING, allowNull: false},
     description:{type: DataTypes.STRING, allowNull: false},
  
-
   });
   return model;
 }
