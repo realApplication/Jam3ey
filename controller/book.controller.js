@@ -49,6 +49,22 @@ const getPickedBooks = async (req, res) => {
     res.status(200).json(allRecords);
 }
 
+
+////////////////////////////// add new route[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+const getPickedBooksByUserId = async (req, res) => {
+    try{
+     let id = parseInt(req.params.id);
+    let allRecords = await pickedSchema.findAll({where :{ userId :id }});
+    console.log(allRecords);
+    res.status(200).json(allRecords);
+    }catch{
+        res.json('not found')
+    }
+}
+
+
+
+
 const addPickedBooks = async (req, res) => {
     try {
         let id = parseInt(req.params.id);
@@ -123,5 +139,6 @@ module.exports = {
     deleteBooks,
     getPickedBooks,
     addPickedBooks,
-    deletePickedBooks
+    deletePickedBooks,
+    getPickedBooksByUserId
 }

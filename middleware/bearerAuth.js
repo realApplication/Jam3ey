@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     req.user = validUser;
     console.log(req.user);
     req.token = validUser.token;
-    req.userId=validUser.id;
+    req.userId=parseInt(validUser.id);
     next();
 
   } catch (e) {

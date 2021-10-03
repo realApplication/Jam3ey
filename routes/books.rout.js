@@ -11,7 +11,8 @@ const {
     deleteBooks,
     getPickedBooks,
     addPickedBooks,
-    deletePickedBooks
+    deletePickedBooks,
+    getPickedBooksByUserId
 
 } =require('../controller/book.controller')
 
@@ -26,5 +27,10 @@ router.delete('/book/:id',deleteBooks );
 router.get('/pickedbook',bearerAuth,getPickedBooks)
 router.post('/pickedbook/:id',bearerAuth,addPickedBooks)
 router.delete('/pickedbook/:id',bearerAuth,deletePickedBooks)
+
+
+///////////////////////////////new route send user id
+
+router.get('/pickedbook/:id',bearerAuth,getPickedBooksByUserId)
 
 module.exports = router;
