@@ -3,11 +3,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const SECRET = process.env.SECRET
-// || 'secretstring';
+const SECRET = process.env.SECRET || 'secretstring';
 
 const userModel = (sequelize, DataTypes) => {
-  const model = sequelize.define('supervisrorsignup', {
+  const model = sequelize.define('supertest', {
     email: { type: DataTypes.STRING, required: true, unique: true ,validate: { isEmail: true} },
     userName: { type: DataTypes.STRING, required: true },
     password: { type: DataTypes.STRING, required: true },
@@ -33,18 +32,6 @@ const userModel = (sequelize, DataTypes) => {
     if (valid) { return user; }
     throw new Error('Invalid User');
   };
-  model.authenticateToken = async function (token) {
-    try {
-      const parsedToken = jwt.verify(token, SECRET);
-      const user = this.findOne({where: { email: parsedToken.email } });
-      if (user) { return user; }
-      throw new Error("User Not Found");
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  };
-
-
 
   return model;
 }
