@@ -61,7 +61,7 @@ const getPickedBooksByUserId = async (req, res) => {
     console.log(allRecords);
     res.status(200).json(allRecords);
     }catch{
-        res.json('not found')
+        res.status(200).json('not found')
     }
 }
 
@@ -126,6 +126,12 @@ const deletePickedBooks = async (req, res) => {
         console.log(err);
     }
 }
+const getBooksById = async (req, res) => {
+    let id = parseInt(req.params.id);
+    let allRecords = await books.findOne({ where: { id: id } });
+    console.log(allRecords);
+    res.status(200).json(allRecords.title);
+}
 
 
 module.exports = {
@@ -135,7 +141,8 @@ module.exports = {
     getPickedBooks,
     addPickedBooks,
     deletePickedBooks,
-    getPickedBooksByUserId
+    getPickedBooksByUserId,
+    getBooksById,
 }
 
 

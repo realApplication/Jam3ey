@@ -16,7 +16,7 @@ const bookSchemas =bookSchema(sequelize, DataTypes)
 const userModels=userModel(sequelize, DataTypes)
 const pickedSchemas=pickedSchema(sequelize, DataTypes)
 const counterSchemas=counterSchema(sequelize, DataTypes)
-const superSchema = superModel(sequelize, DataTypes)
+const superSchemas = superModel(sequelize, DataTypes)
 
 // userModels.hasMany(bookSchemas, { foreignKey: 'customerId', sourceKey: 'id'});
 // bookSchemas.belongsTo(userModels, { foreignKey: 'customerId', targetKey: 'id'});
@@ -32,7 +32,7 @@ module.exports = {
     books: bookSchemas,
     pickedSchema: pickedSchemas,
     counterSchema:counterSchemas,
-    superSchema:superSchema
+    superSchema:superSchemas
 };
 
 

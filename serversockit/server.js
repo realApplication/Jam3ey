@@ -57,6 +57,7 @@ io.on('connection', socket => {
       bookId:payload.bookid,
       time :`day: ${day} Time :${time}`
     }
+    console.log('recervedata------------->',payload);
     if(getcount>=5)
        {
          io.emit('supervisor', recervedata)

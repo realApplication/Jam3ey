@@ -14,7 +14,8 @@ const {
     getPickedBooks,
     addPickedBooks,
     deletePickedBooks,
-    getPickedBooksByUserId
+    getPickedBooksByUserId,
+    getBooksById
     
 } =require('../controller/book.controller')
 
@@ -24,6 +25,7 @@ router.get('/book/:id', getBooks);
 router.get('/book', getBooks);
 router.post('/book',addBooks );
 router.delete('/book/:id',deleteBooks );
+router.get('/bookid/:id', getBooksById);
 
 
 
