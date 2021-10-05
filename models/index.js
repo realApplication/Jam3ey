@@ -5,16 +5,17 @@ const { Sequelize, DataTypes } = require('sequelize');
 const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
 const counterSchema = require('./counter-Schema')
-const POSTGRES_URI= process.env.DATABASE_URL ; // || 'postgres://localhost:5432/samah-abujwaied'
+const POSTGRES_URI =  process.env.DATABASE_URL //|| "postgres://localhost:5432/samah-abujwaied";
+const { Sequelize, DataTypes } = require('sequelize');
 let sequelizeOptions = {
-    dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        }
+  dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
       }
-  } ;
-let sequelize = new Sequelize(POSTGRES_URI,sequelizeOptions);
+    }
+} ;
+let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
 const userModel = require('./student-Schema')
 const supervisorMOdel = require('./supervisor-Schema')
 const superModel = require('./room-Schema')
