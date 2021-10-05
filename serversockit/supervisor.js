@@ -8,9 +8,11 @@ const socket = client.connect(host);
 const {superSchema}= require('../models/index')
 
 socket.on('supervisor' , async(data)=>{
-    console.log(data);
     let ranId = Math.floor(Math.random() * 4);
     let counterData = await superSchema.findOne({where:{id:ranId}})
+    console.log('counterData-------->',counterData);
+    console.log('counterData----dataValues---->',counterData.dataValues);
+
      let classdata ={
          volunteerName : data.name.student,
          studentNum : data.studentsNum,

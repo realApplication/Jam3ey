@@ -14,7 +14,6 @@ const handleVolunteer= async (req , res)=>{
      try { let id=req.userId;
       let Record= await students.findOne({where:{id:id}});
       let name=Record.dataValues.userName;
-      console.log('name',name);
       let volunteerpicked= await pickedSchema.findOne({where:{userId:id}});
       let bookid = volunteerpicked.dataValues.id;
     let UserData=
@@ -25,10 +24,10 @@ const handleVolunteer= async (req , res)=>{
         bookid:bookid
     };
     socket.emit('volunteerdata' , UserData);
-   res.json("Thanks for asking to help , see you soon !!!");
+   res.json(`Thank ${UserData.student} for volunteering `);
   }
   catch(err){
-    res.status(500).json('Welcome volunteer : Please you need to pick book first .. Thank you ')
+    res.status(200).json('Welcome volunteer : Please you need to pick book first .. Thank you ')
   }
  
     

@@ -11,7 +11,7 @@ let askHelp= async (req , res)=>{
 try {
     let id=req.userId;
     let Record = await pickedSchema.findOne({ where: { userId: id } });
-    console.log('Racourd ' , Record);
+    // console.log('Racourd ' , Record);
     let userId=req.userId;
  
     let data={
@@ -22,7 +22,7 @@ try {
         studentId:Record.dataValues.userId,
         bookId:Record.dataValues.id
     };
-    console.log('data ---->',data);
+    // console.log('data ---->',data);
     req.body=data;
     let dataTest=await pickedSchema.findOne({where :{ userId :userId ,title:Record.dataValues.title}});
     console.log('data test ',dataTest);

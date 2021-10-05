@@ -1,12 +1,9 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-const {students}  = require('../models/index');
-const basicAuth = require('../middleware/basicAuth');
 const bearerAuth = require("../middleware/bearerAuth");
 const handleVolunteer=require("../serversockit/volunteer")
 const handleHelp = require("../serversockit/askHelp")
-const getCount = require ('../controller/counter.controller')
 const {
     getBooks,
     addBooks,
@@ -14,7 +11,8 @@ const {
     getPickedBooks,
     addPickedBooks,
     deletePickedBooks,
-    getPickedBooksByUserId
+    getPickedBooksByUserId,
+    getBooksById
     
 } =require('../controller/book.controller')
 
@@ -24,6 +22,7 @@ router.get('/book/:id', getBooks);
 router.get('/book', getBooks);
 router.post('/book',addBooks );
 router.delete('/book/:id',deleteBooks );
+router.get('/bookid/:id', getBooksById);
 
 
 

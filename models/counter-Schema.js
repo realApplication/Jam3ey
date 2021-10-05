@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 const counterbookSchema = (sequelize, DataTypes) => {
-  const model = sequelize.define('bookscounte', {
+  const model = sequelize.define('bookscounteer', {
     idbook: {type: DataTypes.INTEGER, required: true, unique: true },
     counter: { type: DataTypes.INTEGER, required: true}
   });

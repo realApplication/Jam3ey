@@ -3,6 +3,7 @@ const express = require('express');
 const basicAuth = require('../middleware/basicAuth');
 
 const router = express.Router();
+const {supervisor}= require('../models/index')
 const { 
     addRoom,
     deleteRoom,
@@ -12,7 +13,7 @@ const signin = require('../controller/signinsupervisor')
 const signup = require('../controller/signupsupervisor')
 
 router.post('/v1/signup',signup)
-router.post('/v1/signin',basicAuth,signin);
+router.post('/v1/signin',basicAuth(supervisor),signin);
 
 router.get('/v1/data/:id', getRoom);
 router.get('/v1/data', getRoom);
