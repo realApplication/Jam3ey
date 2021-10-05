@@ -6,7 +6,6 @@ const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
 const counterSchema = require('./counter-Schema')
 const POSTGRES_URI =  process.env.DATABASE_URL //|| "postgres://localhost:5432/samah-abujwaied";
-const { Sequelize, DataTypes } = require('sequelize');
 var client = new pg.Client({
     user: "admin",
     password: "guest",
@@ -24,8 +23,6 @@ let sequelizeOptions = {
       }
     }
 } ;
-
-
 
 let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
 const userModel = require('./student-Schema')
