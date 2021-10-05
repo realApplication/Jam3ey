@@ -5,7 +5,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
 const counterSchema = require('./counter-Schema')
-const POSTGRES_URI= process.env.DATABASE_URL;// || 'postgres://localhost:5432/samah-abujwaied'
+const POSTGRES_URI= process.env.DATABASE_URL ; // || 'postgres://localhost:5432/samah-abujwaied'
 let sequelizeOptions = {
     dialectOptions: {
         ssl: {
@@ -24,13 +24,6 @@ const userModels=userModel(sequelize, DataTypes)
 const pickedSchemas=pickedSchema(sequelize, DataTypes)
 const counterSchemas=counterSchema(sequelize, DataTypes)
 const superSchemas = superModel(sequelize, DataTypes)
-
-// userModels.hasMany(bookSchemas, { foreignKey: 'customerId', sourceKey: 'id'});
-// bookSchemas.belongsTo(userModels, { foreignKey: 'customerId', targetKey: 'id'});
-
-// userModels.hasMany(pickedSchemas, { foreignKey: 'userId', sourceKey: 'id'});
-// pickedSchemas.belongsTo(userModels, { foreignKey: 'userId', targetKey: 'id'});
-
 
 module.exports = {
     db: sequelize,
