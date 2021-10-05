@@ -9,13 +9,14 @@ const {superSchema}= require('../models/index')
 
 socket.on('supervisor' , async(data)=>{
     console.log(data);
-    let ranId = Math.floor(Math.random() * 10);
+    let ranId = Math.floor(Math.random() * 4);
     let counterData = await superSchema.findOne({where:{id:ranId}})
      let classdata ={
          volunteerName : data.name.student,
          studentNum : data.studentsNum,
          className:counterData.dataValues.classroom,
          time:data.time,
+         bookNameID:data.name.bookid
      }
     socket.emit('classRoom', classdata )
 } );

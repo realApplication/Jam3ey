@@ -4,15 +4,19 @@ require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
+const counterSchema = require('./counter-Schema')
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/samah-abujwaied'
 
 let sequelize = new Sequelize(DATABASE_URL,);
 const userModel = require('./student-Schema')
 const supervisorMOdel = require('./supervisor-Schema')
+const superModel = require('./room-Schema')
 
 const bookSchemas =bookSchema(sequelize, DataTypes)
 const userModels=userModel(sequelize, DataTypes)
 const pickedSchemas=pickedSchema(sequelize, DataTypes)
+const counterSchemas=counterSchema(sequelize, DataTypes)
+const superSchema = superModel(sequelize, DataTypes)
 
 // userModels.hasMany(bookSchemas, { foreignKey: 'customerId', sourceKey: 'id'});
 // bookSchemas.belongsTo(userModels, { foreignKey: 'customerId', targetKey: 'id'});
@@ -26,7 +30,9 @@ module.exports = {
     students: userModels,
     supervisor : supervisorMOdel(sequelize,DataTypes),
     books: bookSchemas,
-    pickedSchema: pickedSchemas
+    pickedSchema: pickedSchemas,
+    counterSchema:counterSchemas,
+    superSchema:superSchema
 };
 
 

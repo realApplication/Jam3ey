@@ -23,8 +23,9 @@ const setCounter=async (idbook,counterbook)=>{
    
 }
 const getCounter=async (id)=>{
-    let idx = id.toString(); 
-    let counterData = await counterSchema.findOne({where:{idbook:idx}});
+    // let idx = id.toString(); 
+    console.log('id------------>',id);
+    let counterData = await counterSchema.findOne({where:{idbook:id}});
     return counterData.dataValues.counter
   
 }
