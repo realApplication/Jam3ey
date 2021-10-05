@@ -8,6 +8,15 @@ const io = require("socket.io")(http, {   cors: {     origin: "*",     methods: 
 // const io = require('socket.io')(7893)
 const PORT =7893;
 // const io = require('socket.io')(7893)
+let client = new pg.Client({
+  user: "admin",
+  password: "guest",
+  database: "Employees",
+  port: 5432,
+  host: "localhost",
+  ssl: true
+}); 
+const socket = client.connect();
 
 const {setCounter,getCounter} = require('./conuterbook')
 app.use(cors());
