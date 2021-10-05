@@ -39,7 +39,7 @@ try {
 }
 catch (err) {
 
-    res.status(500).json('You need to pick course first ..')
+    res.status(200).json('You need to pick course first ..')
 }
 
 }

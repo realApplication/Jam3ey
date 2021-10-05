@@ -3,6 +3,9 @@
 const { books } = require('../models/index');
 const { pickedSchema } = require('../models/index')
 
+const client = require('socket.io-client');
+const host = "http://localhost:7893";
+const socket = client.connect(host);
 
 
 const getBooks = async (req, res) => {
@@ -78,7 +81,8 @@ const addPickedBooks = async (req, res) => {
             author:Record.dataValues.author,
             image:Record.dataValues.image,
              userId:userId,
-             description:Record.dataValues.description
+             description:Record.dataValues.description,
+             bookId:Record.dataValues.id,
         };
         req.body=data;
     

@@ -2,11 +2,13 @@
 const express = require("express");
 require("dotenv").config();
 const app = express();
-const server = require('http').createServer(app)
-const io = require('socket.io')(7893)
-
-// const io = require('socket.io')(7893)
 const cors = require('cors');
+const http = require('http').createServer(app)
+const io = require("socket.io")(http, {   cors: {     origin: "*",     methods: ["GET", "POST"],     credentials: true   } });
+// const io = require('socket.io')(7893)
+const PORT=7893;
+// const io = require('socket.io')(7893)
+
 const {setCounter,getCounter} = require('./conuterbook')
 app.use(cors());
 
@@ -46,11 +48,13 @@ io.on('connection', socket => {
       time: `day: ${day} Time :${time}`,
       payload: payload
     });
+    console.log('payload.bookId----------->',payload);
     let getcounter = await getCounter(payload.bookid)
     let getcount = parseInt(getcounter)
     let recervedata = {
       name:payload,
       studentsNum : getcount,
+      bookId:payload.bookid,
       time :`day: ${day} Time :${time}`
     }
     if(getcount>=5)
@@ -64,6 +68,9 @@ io.on('connection', socket => {
   })
 
 });
+http.listen(PORT, function() {
+  console.log(`listening on port ${PORT}`)
+})
 
 
 
