@@ -7,6 +7,15 @@ const pickedSchema = require('./picked-Schema');
 const counterSchema = require('./counter-Schema')
 const POSTGRES_URI =  process.env.DATABASE_URL //|| "postgres://localhost:5432/samah-abujwaied";
 const { Sequelize, DataTypes } = require('sequelize');
+var client = new pg.Client({
+    user: "admin",
+    password: "guest",
+    database: "Employees",
+    port: 5432,
+    host: "localhost",
+    ssl: true
+}); 
+client.connect();
 let sequelizeOptions = {
   dialectOptions: {
       ssl: {
@@ -15,6 +24,9 @@ let sequelizeOptions = {
       }
     }
 } ;
+
+
+
 let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
 const userModel = require('./student-Schema')
 const supervisorMOdel = require('./supervisor-Schema')
