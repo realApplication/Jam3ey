@@ -6,7 +6,7 @@ const cors = require('cors');
 const http = require('http').createServer(app)
 const io = require("socket.io")(http, {   cors: {     origin: "*",     methods: ["GET", "POST"],     credentials: true   } });
 // const io = require('socket.io')(7893)
-const PORT=process.env.PORT || 7893;
+const PORT =7893;
 // const io = require('socket.io')(7893)
 
 const {setCounter,getCounter} = require('./conuterbook')
