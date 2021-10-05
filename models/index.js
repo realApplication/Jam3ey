@@ -6,21 +6,12 @@ const bookSchema = require('./books-Schema');
 const pickedSchema = require('./picked-Schema');
 const counterSchema = require('./counter-Schema')
 const POSTGRES_URI =  process.env.DATABASE_URL //|| "postgres://localhost:5432/samah-abujwaied";
-var client = new pg.Client({
-    user: "admin",
-    password: "guest",
-    database: "Employees",
-    port: 5432,
-    host: "localhost",
-    ssl: true
-}); 
-client.connect();
+
 let sequelizeOptions = {
-  dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      }
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false
+        }
     }
 } ;
 
