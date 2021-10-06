@@ -2,9 +2,18 @@
 
 require('dotenv').config();
 
-const client = require('socket.io-client');
-const host = process.env.HOST || "http://localhost:7893";
-const socket = client.connect(host);
+// const client = require('socket.io-client');
+// const host = process.env.HOST || "http://localhost:7893";
+// const socket = client.connect(host);
+let client = new pg.Client({
+  user: "admin",
+  password: "guest",
+  database: "Employees",
+  port: 5432,
+  host: "localhost",
+  ssl: true
+}); 
+const socket = client.connect();
 const {students}=require('../models/index');
 const {pickedSchema}=require('../models/index')
 

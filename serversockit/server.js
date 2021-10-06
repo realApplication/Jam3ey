@@ -6,8 +6,17 @@ const cors = require('cors');
 const http = require('http').createServer(app)
 const io = require("socket.io")(http, {   cors: {     origin: "*",     methods: ["GET", "POST"],     credentials: true   } });
 // const io = require('socket.io')(7893)
-const PORT=7893;
+const PORT =7893;
 // const io = require('socket.io')(7893)
+let client = new pg.Client({
+  user: "admin",
+  password: "guest",
+  database: "Employees",
+  port: 5432,
+  host: "localhost",
+  ssl: true
+}); 
+const socket = client.connect();
 
 const {setCounter,getCounter} = require('./conuterbook')
 app.use(cors());
@@ -48,7 +57,6 @@ io.on('connection', socket => {
       time: `day: ${day} Time :${time}`,
       payload: payload
     });
-    console.log('payload.bookId----------->',payload);
     let getcounter = await getCounter(payload.bookid)
     let getcount = parseInt(getcounter)
     let recervedata = {
