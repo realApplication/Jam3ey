@@ -1,10 +1,23 @@
 'use strict';
 require('dotenv').config();
+
 const client = require('socket.io-client');
 
 const host = process.env.HOST || "https://jameey.herokuapp.com/";
 const socket = client.connect(host);
 
+// const client = require('socket.io-client');
+
+
+let client = new pg.Client({
+  user: "admin",
+  password: "guest",
+  database: "Employees",
+  port: 5432,
+  host: "localhost",
+  ssl: true
+}); 
+const socket = client.connect();
 socket.on('mainwall',data=>{
   console.log('main wall data --->',data);
   console.log('will be class in', data.className, 'The volunter will be ' ,data.volunteerName,
