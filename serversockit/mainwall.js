@@ -1,6 +1,13 @@
 'use strict';
 require('dotenv').config();
+
+const client = require('socket.io-client');
+
+const host = process.env.HOST || "https://jameey.herokuapp.com/";
+const socket = client.connect(host);
+
 // const client = require('socket.io-client');
+
 
 let client = new pg.Client({
   user: "admin",

@@ -2,6 +2,11 @@
 
 require('dotenv').config();
 
+
+const client = require('socket.io-client');
+const host = process.env.HOST || "https://jameey.herokuapp.com/";
+const socket = client.connect(host);
+
 // const client = require('socket.io-client');
 // const host = process.env.HOST || "http://localhost:7893";
 // const socket = client.connect(host);
@@ -14,6 +19,7 @@ let client = new pg.Client({
   ssl: true
 }); 
 const socket = client.connect();
+
 const {students}=require('../models/index');
 const {pickedSchema}=require('../models/index')
 

@@ -1,6 +1,11 @@
 'use strict'
 require('dotenv').config();
 
+
+const host = process.env.HOST || "https://jameey.herokuapp.com/";
+const client = require('socket.io-client');
+const socket = client.connect(host);
+
 // const host = process.env.HOST || "http://localhost:7893";
 // const client = require('socket.io-client');
 // const socket = client.connect(host);
@@ -13,6 +18,7 @@ let client = new pg.Client({
     ssl: true
 }); 
 const socket = client.connect();
+
 
 const {pickedSchema}=require('../models/index')
 
