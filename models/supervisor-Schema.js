@@ -27,10 +27,13 @@ const userModel = (sequelize, DataTypes) => {
     user.password = hashedPass;
   });
   model.authenticateBasic = async function (username, password) {
+    console.log("username , password // supervisor schema" , username , password)
     const user = await this.findOne({ where: { email:username } });
+    console.log("password , user.paswword / supervisor schema",password , user.password )
     const valid = await bcrypt.compare(password, user.password);
+  
     if (valid) { return user; }
-    throw new Error('Invalid User');
+    throw new Error('Invalid User>>>>');
   };
 
   return model;
