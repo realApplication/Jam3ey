@@ -99,7 +99,7 @@ const addPickedBooks = async (req, res) => {
    console.log(">>>>>>>>>>>>>>>>>>>>>>ERROR MESSAGE",err);
         if(err.message=="Validation error")
         {
-            res.json("all ready have it")
+            res.status(203).json("all ready have it")
             return false;
         }
         res.json('not found')

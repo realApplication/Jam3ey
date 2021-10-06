@@ -4,6 +4,9 @@ const base64 = require('base-64')
 
 
 module.exports = (UserSchema) => (req, res, next) => {
+
+     console.log("req.headers['authorization']",req.headers['authorization']);
+
     if (!req.headers['authorization']) {
         next('No Authorization info');
         return;
@@ -16,6 +19,7 @@ module.exports = (UserSchema) => (req, res, next) => {
     let [email, password] = decoded.split(":"); // rawan test@1234
    
     // is this user ok?
+    console.log("[email,password]//basic Auth" , email , password)
     UserSchema.authenticateBasic(email, password).then(validUser=> {
         req.user = validUser;
         next();
